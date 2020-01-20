@@ -9,14 +9,17 @@
  ```
 
 ### Desafio:
- - Criar uma configuração webpack contendo um pipeline de desenvolvimento e um de produção. Essa configuração deve ser feita a partir do zero. Modelos pré-configurados como os do vue-cli, create-react-app ou angular-cli não serão considerados válidos.
+ - Criar uma aplicação em javascript semelhante a lista de conversas do whatsapp utilizando qualquer framework que desejar.
 
 #### Considerações: 
-- Utilizar babel para transpilação;
-- Suportar features do ES6+ como async/await, object destructuring, map/spread operators;
-- Posuir hot-reload ou live-roload;
-- Possuir optimizações de performance no pipeline de produção.
+- Utilizar features do ES6+ como async/await, object destructuring, map/spread operators;
+- Possuir um layout responsivo;
+- Utilizar dados falsos para simular as conversas;
+- Documentação descrevendo a metodologia utilizada;
 
 #### Diferenciais:
-- Configurar o webpack para suportar testes unitários com jest;
-- Documentação descrevendo a configuração;
+- Utilizar react e redux;
+- Utilizar typescript;
+- Utilizar testes automatizados;
+- Configuração webpack do zero;
+- Utilizar metodologias e boas práticas de código;
