@@ -1,6 +1,5 @@
 const
   path = require('path'),
-
   HTMLWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
@@ -10,7 +9,7 @@ module.exports = {
     filename: 'bundle.js'
   },
   resolve: {
-    extensions: [ '.ts', '.tsx', '.js', '.mjs' ]
+    extensions: [ '.ts', '.tsx', '.js', '.jsx', '.mjs' ]
   },
   module: {
     rules: [
@@ -26,16 +25,28 @@ module.exports = {
               ]
             }
           },
-          {
-            loader: 'ts-loader'
-          }
+          'ts-loader'
         ]
       },
-      // {
-      //   test: /\.scss$/,
-      //   exclude: /node_modules/,
-      //   use: []
-      // }
+      {
+        test: /\.s[ac]ss$/,
+        exclude: /node_modules/,
+        use: [
+          'style-loader',
+          'css-loader',
+          {
+            loader: 'sass-loader',
+            options: {
+              implementation: require('sass'),
+              sourceMap: true,
+              sassOptions: {
+                outputStyle: 'compressed',
+                fiber: require('fibers')
+              }
+            }
+          }
+        ]
+      }
     ]
   },
   devServer: {
@@ -63,7 +74,8 @@ module.exports = {
         removeScriptTypeAttributes: true,
         removeStyleLinkTypeAttributes: true,
         useShortDoctype: false
-      }
+      },
+      favicon: path.resolve(__dirname, 'src/favicon.png')
     })
   ]
 };
