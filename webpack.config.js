@@ -3,7 +3,7 @@ const
   HTMLWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: path.resolve(__dirname, './src/index.tsx'),
+  entry: [ 'babel-polyfill', path.resolve(__dirname, './src/index.tsx') ],
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js'
@@ -44,6 +44,14 @@ module.exports = {
                 fiber: require('fibers')
               }
             }
+          }
+        ]
+      },
+      {
+        test: /\.(png|jpe?g|gif|svg)$/i,
+        use: [
+          {
+            loader: 'file-loader',
           }
         ]
       }
