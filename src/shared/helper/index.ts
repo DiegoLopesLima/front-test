@@ -16,3 +16,11 @@ export const dynamicClassName = (classNames: any) => {
     };
   }
 };
+
+export const getParamsAsQueryString = (params: object = {}, prefix: string = '') => {
+  const keys = Object.keys(params);
+
+  return (keys.length ? prefix : '') + Object.keys(params)
+    .map(param => `${param}=${escape(params[param])}`)
+    .join('&');
+};

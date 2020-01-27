@@ -1,7 +1,8 @@
 $primary: #36ABFF;
 
 @import '~bootstrap/scss/functions';
-@import '~bootstrap/scss/variables';
+@import 'assets/stylesheets/variables';
+// @import '~bootstrap/scss/variables';
 @import '~bootstrap/scss/mixins';
 @import '~bootstrap/scss/root';
 @import '~bootstrap/scss/reboot';
@@ -34,10 +35,6 @@ $primary: #36ABFF;
 // @import '~bootstrap/scss/tooltip';
 // @import '~bootstrap/scss/popover';
 // @import '~bootstrap/scss/carousel';
-// @import '~bootstrap/scss/spinners';
+@import '~bootstrap/scss/spinners';
 @import '~bootstrap/scss/utilities';
 @import '~bootstrap/scss/print';
-
-.vh-100 {
-  height: 100vh;
-}

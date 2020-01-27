@@ -1,0 +1,36 @@
+// @import '../../../assets/stylesheets/variables';
+
+$custom-input-height: 60px;
+
+.custom-input {
+  position: relative;
+  background-color: #FFFFFF;
+  width: 100%;
+  height: $custom-input-height;
+
+  &-input {
+    position: absolute;
+    z-index: 20;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 1.1rem 1rem;
+    outline: none;
+    white-space: pre-wrap;
+  }
+
+  &-placeholder {
+    position: absolute;
+    z-index: 10;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 0 1rem;
+    opacity: 0.6;
+    // color: $input-placeholder-color;
+  }
+
+  &-input:not(:empty) + &-placeholder {
+    display: none;
+  }
+}

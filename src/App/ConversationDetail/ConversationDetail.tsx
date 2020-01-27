@@ -1,10 +1,13 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC, useEffect, createRef } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import { withRouter } from 'react-router';
+import { Scrollbars } from 'react-custom-scrollbars';
 
 import MessageBallon from '../MessageBalloon/MessageBalloon';
 import * as MessagesAction from '../../shared/store/actions/MessagesAction';
+import MessageInput from '../MessageInput/MessageInput';
 
 import './ConversationDetail.scss';
 
@@ -16,28 +19,49 @@ const
     messagesError,
     recordMessages
   }: any) => {
-    // useEffect(() => {
-    //   recordMessages();
-    // }, [ recordMessages ]);
+    const
+      scrollbarsRef = createRef<any>(),
+      { conversationId } = useParams();
+
+    useEffect(() => {
+      recordMessages({ conversationId })
+    }, [ conversationId ]);
+
+    useEffect(() => {
+      scrollbarsRef.current.scrollToBottom();
+    }, [ messages ]);
 
     return (
-      <div className='conversation bg-primary'>
-        {messagesLoading && (
-          <div className="alert alert-info">Loading...</div>
-        )}
+      <>
+        <div className='conversation full-page bg-primary d-flex align-items-end flex-column bd-highlight'>
+          <div className='w-100'>
+            <Scrollbars ref={scrollbarsRef} className='conversation-scrollbars'>
+              {messages.map(({ body, isMine, id, authorName, creationDate }, index) => (
+                <MessageBallon
+                  authorName={authorName}
+                  body={body}
+                  placement={isMine ? 'right' : 'left'}
+                  key={id}
+                  creationDate={creationDate}
+                  fromPrevious={messages[index - 1] && messages[index - 1].authorName === authorName}
+                />
+              ))}
+            </Scrollbars>
+          </div>
 
-        {messagesError && (
-          <div className="alert alert-danger">{messagesError}</div>
-        )}
+          {messagesLoading && (
+            <div className='d-inline-block conversation-spinner'>
+              <div className='spinner-border text-light' role='status'>
+                <span className='sr-only'>Loading...</span>
+              </div>
+            </div>
+          )}
 
-        {messages.map(message => (
-          <MessageBallon
-            body={message.body}
-            placement={message.mine ? 'right' : 'left'}
-            key={message.id}
-          />
-        ))}
-      </div>
+          <div className='conversation-footer w-100 mt-auto'>
+            <MessageInput />
+          </div>
+        </div>
+      </>
     );
   },
   mapStateToProps = ({ messages }) => ({

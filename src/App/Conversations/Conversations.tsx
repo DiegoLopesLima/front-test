@@ -1,54 +1,78 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router';
 
-import { CNativeProps } from '../../shared/interfaces/CNativeProps.interface';
+import * as ConversationsAction from '../../shared/store/actions/ConversationsAction';
 import { dynamicClassName } from '../../shared/helper';
-import { Conversation } from '../../shared/interfaces/Conversation';
 
 import './Conversations.scss';
 
-export interface ConversationsProps extends CNativeProps {
-  conversations: Conversation[]
-}
-
 const
-  Conversations: FC<ConversationsProps> = ({ conversations = [] }) => {
+  Conversations: FC = ({
+    conversations,
+    conversationsLoading,
+    conversationsLoaded,
+    conversationsError,
+    recordConversations
+  }: any) => {
+    useEffect(() => {
+      recordConversations();
+    }, []);
+
     return (
       <>
-        {conversations.length > 0 ? (
+        { conversations.length > 0 ? (
           <div className='list-group'>
             { conversations.map(conversation => (
-              <a
-                href=''
+              <Link
+                to={`/conversation/${conversation.id}`}
                 className='list-group-item list-group-item-action d-flex justify-content-between align-items-center rounded-0'
-                key={conversation.id}
+                key={ conversation.id }
               >
-                <div className="w-100">
-                  <div {...dynamicClassName({ 'font-weight-bold': conversation.unreadMessages > 0 })}>
-                    { conversation.name }
+                <div className='row'>
+                  <div className='col-auto px-1'>
+                    <img src={require('../../assets/images/apple-icon-60x60.png')} alt='' className='mr-1' width='50' />
                   </div>
 
-                  <small
-                    {...dynamicClassName({
-                      'font-weight-bold': conversation.unreadMessages > 0,
-                      'd-inline-block text-truncate w-100': true
-                    })}
-                    title={conversation.lastMessage}
-                  >
-                    { conversation.lastMessage }
-                  </small>
+                  <div className='col pl-2 d-none d-lg-block'>
+                    <div { ...dynamicClassName({ 'font-weight-bold': conversation.unreadMessages > 0 }) }>
+                      { conversation.name }
+                    </div>
+
+                    <div>
+                      <small
+                        { ...dynamicClassName({
+                          'font-weight-bold': conversation.unreadMessages > 0,
+                          'd-inline-block': true
+                        }) }
+                        title={conversation.lastMessage}
+                      >
+                        { conversation.lastMessage }
+                      </small>
+                    </div>
+                  </div>
                 </div>
 
-                {conversation.unreadMessages > 0 && (
+                { conversation.unreadMessages > 0 && (
                   <span className='badge badge-primary badge-pill'>{ conversation.unreadMessages }</span>
-                )}
-              </a>
+                ) }
+              </Link>
             )) }
           </div>
         ) : (
           <div className='alert alert-info rounded-0'>Nenhuma conversa para listar.</div>
-        )}
+        ) }
       </>
-    )
-  };
+    );
+  },
+  mapStateToProps = ({ conversations }) => ({
+    conversations: conversations.conversations,
+    conversationsLoading: conversations.loading,
+    conversationsLoaded: conversations.loaded,
+    conversationsError: conversations.error
+  }),
+  mapDispatchToProps = (dispatch: any) => bindActionCreators(ConversationsAction, dispatch);
 
-export default Conversations;
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Conversations));

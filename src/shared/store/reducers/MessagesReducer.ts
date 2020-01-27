@@ -7,43 +7,7 @@ interface MessagesState {
 
 const
   INITIAL_STATE: MessagesState = {
-    messages: [
-      {
-        id: 1,
-        body: 'Lorem ipsum dolor sit amet.',
-        mine: false
-      },
-      {
-        id: 2,
-        body: 'Harum doloribus repudiandae quae aliquid nam.',
-        mine: false
-      },
-      {
-        id: 3,
-        body: 'Nulla, laboriosam nam expedita, recusandae vitae voluptatum amet odit maiores necessitatibus harum eum dolorum mollitia? Autem ex consequuntur perspiciatis libero, consectetur quidem quis suscipit non repellat error debitis tempora, cum quae optio dolores illo quod saepe.',
-        mine: false
-      },
-      {
-        id: 4,
-        body: 'At maiores sint vitae.',
-        mine: true
-      },
-      {
-        id: 5,
-        body: 'Aliquam natus ipsum sapiente. Eos expedita iste vel nesciunt ea fuga perferendis aliquid. Quis necessitatibus cum cumque atque officia temporibus velit.',
-        mine: false
-      },
-      {
-        id: 6,
-        body: 'Dolore deserunt neque placeat.',
-        mine: true
-      },
-      {
-        id: 7,
-        body: 'Ullam quidem ex doloribus tempore atque enim alias nihil aspernatur.',
-        mine: true
-      }
-    ],
+    messages: [],
     loading: false,
     loaded: false,
     error: false

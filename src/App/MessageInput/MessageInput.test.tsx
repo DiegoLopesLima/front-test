@@ -1,9 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { render } from 'enzyme';
 
-import Conversations from './Conversations';
+import MessageInput from './MessageInput';
 
-const Component = Conversations.WrappedComponent;
+const Component = MessageInput.WrappedComponent;
 
 it('renders without crashing', () => {
   const div = document.createElement('div');

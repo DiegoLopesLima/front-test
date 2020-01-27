@@ -6,10 +6,11 @@ module.exports = {
   entry: [ 'babel-polyfill', path.resolve(__dirname, './src/index.tsx') ],
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js'
+    filename: 'bundle.js',
+    publicPath: '/'
   },
   resolve: {
-    extensions: [ '.ts', '.tsx', '.js', '.jsx', '.mjs' ]
+    extensions: [ '.ts', '.tsx', '.js', '.jsx' ]
   },
   module: {
     rules: [
@@ -17,41 +18,52 @@ module.exports = {
         test: /\.[jt]sx?$/,
         exclude: /node_modules/,
         use: [
-          {
-            loader: 'babel-loader',
-            options: {
-              presets: [
-                '@babel/preset-env'
-              ]
-            }
-          },
+          'babel-loader',
           'ts-loader'
         ]
       },
       {
-        test: /\.s[ac]ss$/,
+        test: /\.s?css$/,
         exclude: /node_modules/,
         use: [
-          'style-loader',
+          {
+            loader: 'style-loader',
+            options: {
+              esModule: true
+            }
+          },
           'css-loader',
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: () => [ require('autoprefixer') ]
+            }
+          },
           {
             loader: 'sass-loader',
             options: {
               implementation: require('sass'),
               sourceMap: true,
               sassOptions: {
-                outputStyle: 'compressed',
-                fiber: require('fibers')
+                outputStyle: 'compressed'
               }
             }
           }
         ]
       },
       {
-        test: /\.(png|jpe?g|gif|svg)$/i,
+        test: /\.(png|svg|jpe?g|gif)$/,
         use: [
           {
-            loader: 'file-loader',
+            loader: 'url-loader',
+            options: {
+              limit: 100000,
+              fallback: 'file-loader',
+              name: '[name].[ext]',
+              publicPath: 'dist/img/',
+              outputPath: 'dist/img/',
+              esModule: false
+            }
           }
         ]
       }
@@ -65,8 +77,8 @@ module.exports = {
     historyApiFallback: {
       rewrites: [
         {
-          from: /.*/,
-          to: 'index.html'
+          from: /\/$/,
+          to: './index.html'
         }
       ]
     },
@@ -74,6 +86,8 @@ module.exports = {
   },
   plugins: [
     new HTMLWebpackPlugin({
+      filename: 'index.html',
+      inject: false,
       template: path.resolve(__dirname, 'src/index.html'),
       minify: {
         collapseWhitespace: true,
@@ -82,8 +96,7 @@ module.exports = {
         removeScriptTypeAttributes: true,
         removeStyleLinkTypeAttributes: true,
         useShortDoctype: false
-      },
-      favicon: path.resolve(__dirname, 'src/favicon.png')
+      }
     })
   ]
 };

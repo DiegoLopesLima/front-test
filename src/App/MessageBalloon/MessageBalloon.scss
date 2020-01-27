@@ -1,51 +1,65 @@
-// $right-ballon-background-color: #F0F4C3;
-$right-ballon-background-color: #DCEDC8;
+$right-ballon-background-color: lighten(#FFFF00, 35);
 
 .message-ballon {
+  padding-left: 3.625rem;
+  margin: 0.3rem 0;
+
   &-body {
     background-color: #ffffff;
-    padding: 6px 10px;
+    padding: 6px 0.625rem;
     display: inline-block;
-    max-width: 400px;
+    max-width: 100%;
     border-radius: 0.2rem;
     font-size: 0.875rem;
     position: relative;
     border-top-left-radius: 0;
+    margin-right: 3.625rem;
+
+    @media (min-width: 992px) {
+      max-width: 50%;
+    }
 
     &::before {
       content: '';
       width: 0;
       height: 0;
       border-top: 0px solid transparent;
-      border-bottom: 10px solid transparent;
-      border-right: 10px solid #FFFFFF;
+      border-bottom: 0.625rem solid transparent;
+      border-right: 0.625rem solid #FFFFFF;
       position: absolute;
-      left: -10px;
+      left: -0.625rem;
       top: 0;
     }
   }
 
-  &:not(:first-child) {
-    margin-top: 5px;
+  &-right {
+    padding-left: 0;
+    padding-right: 3.625rem;
   }
 
   &-right &-body {
     border-top-right-radius: 0;
     border-top-left-radius: 0.2rem;
     background-color: $right-ballon-background-color;
+    margin-right: 0;
+    margin-left: 3.625rem;
 
     &::before {
       content: '';
       width: 0;
       height: 0;
       border-top: 0 solid transparent;
-      border-bottom: 10px solid transparent;
-      border-left: 10px solid $right-ballon-background-color;
+      border-bottom: 0.625rem solid transparent;
+      border-left: 0.625rem solid $right-ballon-background-color;
       border-right: none;
       position: absolute;
       left: auto;
-      right: -10px;
+      right: -0.625rem;
       top: 0;
     }
+  }
+
+  &.from-previous &-body::before {
+    display: none;
   }
 }

@@ -1,10 +1,11 @@
 import { takeEvery, put, all, call } from 'redux-saga/effects';
 
 import api from '../../services/api';
+import { getParamsAsQueryString } from '../../helper';
 
 function * createMessages(action) {
   try {
-    const { data } = yield call(api.post, '/messages', action.data);
+    const { data } = yield call(api.post, '/messages', action.payload);
 
     yield put({ type: 'CREATE_MESSAGES_SUCCESS', affected: data.affected });
   } catch (error) {
@@ -14,7 +15,7 @@ function * createMessages(action) {
 
 function * recordMessages(action) {
   try {
-    const { data } = yield call(api.get, '/messages', action.filter);
+    const { data } = yield call(api.get, `/messages${getParamsAsQueryString(action.filter, '?')}`);
 
     yield put({ type: 'RECORD_MESSAGES_SUCCESS', affected: data.affected });
   } catch (error) {
@@ -24,7 +25,7 @@ function * recordMessages(action) {
 
 function * updateMessages(action) {
   try {
-    const { data } = yield call(api.put, '/messages', action.data);
+    const { data } = yield call(api.put, '/messages', action.payload);
 
     yield put({ type: 'UPDATE_MESSAGES_SUCCESS', affected: data.affected });
   } catch (error) {
@@ -34,7 +35,7 @@ function * updateMessages(action) {
 
 function * deleteMessages(action) {
   try {
-    const { data } = yield call(api.delete, '/messages', action.data);
+    const { data } = yield call(api.delete, '/messages', action.payload);
 
     yield put({ type: 'DELETE_MESSAGES_SUCCESS', affected: data.affected });
   } catch (error) {

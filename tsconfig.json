@@ -6,6 +6,8 @@
     "module": "commonjs",
     "target": "es6",
     "jsx": "react",
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "allowJs": true,
+    "strict": true
   }
 }

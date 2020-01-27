@@ -1,17 +1,17 @@
-export function createMessages() {
-  return ({ type: 'CREATE_MESSAGES' });
+export function createMessages(payload) {
+  return ({ type: 'CREATE_MESSAGES', payload });
 }
 
-export function recordMessages() {
-  return ({ type: 'RECORD_MESSAGES' });
+export function recordMessages(filter) {
+  return ({ type: 'RECORD_MESSAGES', filter });
 }
 
-export function updateMessages() {
-  return ({ type: 'UPDATE_MESSAGES' });
+export function updateMessages(payload) {
+  return ({ type: 'UPDATE_MESSAGES', payload });
 }
 
-export function deleteMessages() {
-  return ({ type: 'DELETE_MESSAGES' });
+export function deleteMessages(payload) {
+  return ({ type: 'DELETE_MESSAGES', payload });
 }
 
 export function resetMessages() {
