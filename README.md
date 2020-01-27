@@ -24,7 +24,7 @@ Repositório que visa centralizar os testes de front-end da Octadesk.
 - [x] Utilizar metodologias e boas práticas de código;
 
 ## Metodologia
-O conteúdo a seguir descreve os caminhos que tomei para o desenvolvimento do teste.
+O conteúdo a seguir descreve o processo de planejamento e realização do desafio.
 
 ### Levantamento de requisitos
 Foi realizado um estudo de comportamento da referência WhatsApp sugerida no desafio. Através deste estudo foi possível levantar o comportamento básico possível para o prazo sugerido assim como um rascunho de backlog levando em consideração também, os diferenciais sugeridos. Com isso, foi possível chegar a uma ideia de MVP.
@@ -38,6 +38,8 @@ Foi realizado um levantamento ferramentas que poderiam ser utilizadas com base n
 - Jest para testes de unidades.
 - Typescript para tipagem.
 - Yarn como gerenciador de pacotes.
+- Bootstrap como framwork CSS.
+- Sass com pré-processador CSS.
 
 ### Planejamento
 Com a relação de requisitos clara, foi utilizada a ferramenta de Projetos do Github para organizar o backlog em um Kanban simples por onde foi possível organizar e acompanhar todo o progresso do desenvolvimento da aplicação. Deixando claro o que estava pendente, as possíveis implementações e prioridades.
@@ -58,7 +60,7 @@ Também foi criado um documento de texto com uma cópia da descrição do desafi
 
 ### Outras informações
 
-- Para tornar o chat ficasse um pouco mais próximo de um chat real, tomei a liberdade de criar outro repositório com uma aplicação simples em Node.js. Por tanto para rodar este projeto, será necessário executar duas aplicações. A API do repositório https://github.com/DiegoLopesLima/front-test-server e a branch criada para a aplicação client side. Esta aplicação server-side possui uma estrutura muito simples com uma API de mockup.
+- Para tornar o chat um pouco mais próximo de um chat real, tomei a liberdade de criar outro repositório com uma aplicação simples em Node.js. Por tanto para rodar este projeto, será necessário executar duas aplicações. A API do repositório https://github.com/DiegoLopesLima/front-test-server e a branch criada para a aplicação client side. Esta aplicação server-side possui uma estrutura muito simples com uma API de mockup.
 - Apesar do repositório para server-side, não foram adicionados recursos para comunicação real time.
 - Para organizar e testar minhas chamadas para o servidor de mockup utilizei o Insomnia.
 

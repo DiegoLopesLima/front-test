@@ -24,9 +24,4 @@ describe('<ConversationDetail />', () => {
     , div);
     ReactDOM.unmountComponentAtNode(div);
   });
-
-  it('renders correct content', () => {
-    /** @todo Escrever teste. */
-    expect(true).toBe(true);
-  });
 });

@@ -1,7 +1,7 @@
 import React, { FC, useEffect } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { withRouter } from 'react-router';
 
 import * as ConversationsAction from '../../shared/store/actions/ConversationsAction';
@@ -26,14 +26,15 @@ const
         { conversations.length > 0 ? (
           <div className='list-group'>
             { conversations.map(conversation => (
-              <Link
+              <NavLink
                 to={`/conversation/${conversation.id}`}
                 className='list-group-item list-group-item-action d-flex justify-content-between align-items-center rounded-0'
                 key={ conversation.id }
+                activeClassName='list-group-item-active'
               >
                 <div className='row'>
                   <div className='col-auto px-1'>
-                    <img src={require('../../assets/images/apple-icon-60x60.png')} alt='' className='mr-1' width='50' />
+                    <img src={require('../../assets/images/apple-icon-60x60.png')} alt='' width='50' />
                   </div>
 
                   <div className='col pl-2 d-none d-lg-block'>
@@ -58,7 +59,7 @@ const
                 { conversation.unreadMessages > 0 && (
                   <span className='badge badge-primary badge-pill'>{ conversation.unreadMessages }</span>
                 ) }
-              </Link>
+              </NavLink>
             )) }
           </div>
         ) : (

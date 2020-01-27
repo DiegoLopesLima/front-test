@@ -20,7 +20,7 @@ const
           createMessages([
             {
               body,
-              authorName: 'Diego Lopes Lima'
+              authorName: localStorage.getItem('@userName')
             }
           ]);
         }

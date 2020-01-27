@@ -6,10 +6,11 @@ import {
 } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
+import { store } from '../shared/store';
 import { CNativeProps } from '../shared/interfaces/CNativeProps.interface';
 import Conversations from './Conversations/Conversations';
 import ConversationDetail from './ConversationDetail/ConversationDetail'
-import { store } from '../shared/store';
+import Home from './Home/Home';
 
 import './App.scss';
 
@@ -33,9 +34,7 @@ const
               <div className='col'>
                 <Switch>
                   <Route exact path='/'>
-                    <div className="min-vh-100 bg-primary">
-                      Test
-                    </div>
+                    <Home />
                   </Route>
 
                   <Route path='/conversation/:conversationId'>
