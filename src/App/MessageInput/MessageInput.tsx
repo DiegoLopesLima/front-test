@@ -20,7 +20,7 @@ const
           createMessages([
             {
               body,
-              authorName: localStorage.getItem('@userName')
+              authorName: localStorage.getItem('@userName') || 'Convidado'
             }
           ]);
         }
